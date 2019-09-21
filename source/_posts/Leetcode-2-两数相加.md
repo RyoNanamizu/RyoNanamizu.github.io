@@ -1,7 +1,11 @@
 ---
 title: Leetcode 2 两数相加
 date: 2019-09-21 12:50:51
-tags: Leetcode,Javascript
+categories:
+- Leetcode
+tags:
+- Leetcode
+- Javascript
 ---
 
 尝试解答：

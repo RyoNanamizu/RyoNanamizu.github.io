@@ -1,7 +1,13 @@
 ---
 title: 如何在Github Pages上搭建User Page的hexo博客
 date: 2019-09-21 14:20:31
-tags: hexo,userPage,Github,TarvisCI
+categories:
+- Experience
+tags:
+- hexo
+- userPage
+- Github
+- TarvisCI
 ---
 
 由官方教程给出的[推荐方式](https://hexo.io/zh-cn/docs/github-pages)，Travis CI会将public文件夹发布在gh-pages分支下，然而Github对于User Page的限制为仅允许使用master分支作为主分支。
