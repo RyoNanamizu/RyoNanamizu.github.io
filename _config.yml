@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle:
-description:
-keywords:
+title: 七水凌世界
+subtitle: 
+description: 101 To A New World
+keywords: Javascript Frontend Software Developer Web
 author: John Doe
-language: en
-timezone:
+language: zh-Hans-cn
+timezone: UTF+8
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: http://ryonanamizu.github.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
