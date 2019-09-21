@@ -5,16 +5,16 @@ node_js:
 cache: npm
 branches:
   only:
-    - src # build master branch only
+    - src # 改为监视src分支
 script:
   - hexo generate # generate static files
 deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GH_TOKEN
-  target_branch: master
+  target_branch: master # 发布目标为master分支
   keep-history: true
   on:
-    branch: src
+    branch: src # 发布来源为src分支
   verbose: true
   local-dir: public
