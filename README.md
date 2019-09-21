@@ -1,3 +1,3 @@
 # ryonanamizu.github.io
 
-尝试了一下修复
+[![Build Status](https://travis-ci.com/RyoNanamizu/ryonanamizu.github.io.svg?branch=src)](https://travis-ci.com/RyoNanamizu/ryonanamizu.github.io)
