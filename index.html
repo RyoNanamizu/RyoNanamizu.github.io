@@ -62,6 +62,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-如何在Github-Pages上搭建User-Page的hexo博客" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/21/如何在Github-Pages上搭建User-Page的hexo博客/" class="article-date">
+  <time datetime="2019-09-21T14:20:31.000Z" itemprop="datePublished">2019-09-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/21/如何在Github-Pages上搭建User-Page的hexo博客/">如何在Github Pages上搭建User Page的hexo博客</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>由官方教程给出的<a href="https://hexo.io/zh-cn/docs/github-pages" target="_blank" rel="noopener">推荐方式</a>，Travis CI会将public文件夹发布在gh-pages分支下，然而Github对于User Page的限制为仅允许使用master分支作为主分支。</p>
+<p>所以需要以下操作：</p>
+<p>首先，新建一个新的分支，以src为例。将hexo目录（包括_config.yml和package.json的目录）push到src分支，并在github端设置src分支为默认分支。</p>
+<p>之后，修改.travis.yml文件：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">sudo:</span> <span class="literal">false</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">node_js</span></span><br><span class="line"><span class="attr">node_js:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="number">10</span> <span class="comment"># use nodejs v10 LTS</span></span><br><span class="line"><span class="attr">cache:</span> <span class="string">npm</span></span><br><span class="line"><span class="attr">branches:</span></span><br><span class="line"><span class="attr">  only:</span></span><br><span class="line"><span class="bullet">    -</span> <span class="string">src</span> <span class="comment"># 改为监视src分支</span></span><br><span class="line"><span class="attr">script:</span></span><br><span class="line"><span class="bullet">  -</span> <span class="string">hexo</span> <span class="string">generate</span> <span class="comment"># generate static files</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  provider:</span> <span class="string">pages</span></span><br><span class="line"><span class="attr">  skip-cleanup:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  github-token:</span> <span class="string">$GH_TOKEN</span></span><br><span class="line"><span class="attr">  target_branch:</span> <span class="string">master</span> <span class="comment"># 发布目标为master分支</span></span><br><span class="line"><span class="attr">  keep-history:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  on:</span></span><br><span class="line"><span class="attr">    branch:</span> <span class="string">src</span> <span class="comment"># 发布来源为src分支</span></span><br><span class="line"><span class="attr">  verbose:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  local-dir:</span> <span class="string">public</span></span><br></pre></td></tr></table></figure>
+
+<p>这里要注意的是<strong>deploy</strong>和<strong>branches</strong>两段的修改。由监视master-&gt;从master编译-&gt;发布到gh-pages(默认)改为监视src-&gt;由src编译-&gt;发布到gh-pages。</p>
+<p>之后本地修改文章时，请注意在src分支而并非master分支下修改。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/09/21/如何在Github-Pages上搭建User-Page的hexo博客/" data-id="ck0t6cxm10003yrq26y0vcnr3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo-userPage-Github-TarvisCI/">hexo userPage Github TarvisCI</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Leetcode-2-两数相加" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/21/Leetcode-2-两数相加/" class="article-date">
@@ -84,18 +130,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>题目要求：</p>
-<blockquote>
-<p>给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。</p>
-<p>如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。</p>
-<p>您可以假设除了数字 0 之外，这两个数都不会以 0 开头。</p>
-<p>示例：</p>
-<p>输入：(2 -&gt; 4 -&gt; 3) + (5 -&gt; 6 -&gt; 4)<br>输出：7 -&gt; 0 -&gt; 8<br>原因：342 + 465 = 807</p>
-<p>来源：力扣（LeetCode）</p>
-<p>链接：<a href="https://leetcode-cn.com/problems/add-two-numbers" target="_blank" rel="noopener">https://leetcode-cn.com/problems/add-two-numbers</a></p>
-<p>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-</blockquote>
-<p>尝试解答：</p>
+        <p>尝试解答：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"> * function ListNode(val) &#123;</span></span><br><span class="line"><span class="comment"> *     this.val = val;</span></span><br><span class="line"><span class="comment"> *     this.next = null;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; l1</span></span><br><span class="line"><span class="comment"> * @param &#123;ListNode&#125; l2</span></span><br><span class="line"><span class="comment"> * @return &#123;ListNode&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> addTwoNumbers = <span class="function"><span class="keyword">function</span>(<span class="params">l1, l2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">new</span> ListNode(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">let</span> l3 = result</span><br><span class="line">    <span class="keyword">let</span> flag = <span class="literal">true</span></span><br><span class="line">    <span class="keyword">while</span>(flag) &#123;</span><br><span class="line">        l3.val = l1.val + l2.val + l3.val</span><br><span class="line">        <span class="keyword">if</span>(!l1.next &amp;&amp; !l2.next) &#123;</span><br><span class="line">            flag = <span class="literal">false</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(l3.val &gt; <span class="number">9</span>) &#123;</span><br><span class="line">            l3.val -= <span class="number">10</span></span><br><span class="line">            l3.next = <span class="keyword">new</span> ListNode(<span class="number">1</span>)            </span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(flag) &#123;</span><br><span class="line">                l3.next = <span class="keyword">new</span> ListNode(<span class="number">0</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        l1 = l1.next || <span class="keyword">new</span> ListNode(<span class="number">0</span>)</span><br><span class="line">        l2 = l2.next || <span class="keyword">new</span> ListNode(<span class="number">0</span>)</span><br><span class="line">        l3 = l3.next</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 <p>这是一个模拟竖式运算相加的题目，这里新建了一个result链表用来存储答案，同时l3作为指向result链表当前操作节点的指针。flag是判断l1和l2是否已经穷尽到末尾的标志。整体思路是将l1和l2先按位加入l3，l3当即进行进位判断。并确定是否对l3的链表进行延申。</p>
@@ -104,7 +139,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/Leetcode-2-两数相加/" data-id="ck0t5wjcq0000zxpgd887tdxb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/Leetcode-2-两数相加/" data-id="ck0t6cxlq0000yrq2uluwfnlm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode-Javascript/">Leetcode Javascript</a></li></ul>
@@ -119,7 +154,7 @@
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/21/hello-world/" class="article-date">
-  <time datetime="2019-09-21T06:18:24.653Z" itemprop="datePublished">2019-09-21</time>
+  <time datetime="2019-09-21T06:31:09.135Z" itemprop="datePublished">2019-09-21</time>
 </a>
     
   </div>
@@ -155,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/09/21/hello-world/" data-id="ck0t5wjcz0001zxpgiy0epsgv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/09/21/hello-world/" data-id="ck0t6cxlw0001yrq2n6yk9iio" class="article-share-link">Share</a>
       
       
     </footer>
@@ -178,7 +213,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode-Javascript/">Leetcode Javascript</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode-Javascript/">Leetcode Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo-userPage-Github-TarvisCI/">hexo userPage Github TarvisCI</a></li></ul>
     </div>
   </div>
 
@@ -188,7 +223,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Leetcode-Javascript/" style="font-size: 10px;">Leetcode Javascript</a>
+      <a href="/tags/Leetcode-Javascript/" style="font-size: 10px;">Leetcode Javascript</a> <a href="/tags/hexo-userPage-Github-TarvisCI/" style="font-size: 10px;">hexo userPage Github TarvisCI</a>
     </div>
   </div>
 
@@ -208,6 +243,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/09/21/如何在Github-Pages上搭建User-Page的hexo博客/">如何在Github Pages上搭建User Page的hexo博客</a>
+          </li>
         
           <li>
             <a href="/2019/09/21/Leetcode-2-两数相加/">Leetcode 2 两数相加</a>
