@@ -15,4 +15,5 @@ deploy:
   keep-history: true
   on:
     branch: master
+  verbose: true
   local-dir: public
