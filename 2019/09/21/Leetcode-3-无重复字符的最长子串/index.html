@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Leetcode 3 无重复字符的最长子串 | 七水凌世界</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="尝试解答： 123456789101112131415161718192021222324/** * @param &amp;#123;string&amp;#125; s * @return &amp;#123;number&amp;#125; */var lengthOfLongestSubstring = function(s) &amp;#123;    let letterMap = &amp;#123;&amp;#125;    let l">
+<meta name="keywords" content="Leetcode,Javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode 3 无重复字符的最长子串">
+<meta property="og:url" content="http://ryonanamizu.github.com/2019/09/21/Leetcode-3-无重复字符的最长子串/index.html">
+<meta property="og:site_name" content="七水凌世界">
+<meta property="og:description" content="尝试解答： 123456789101112131415161718192021222324/** * @param &amp;#123;string&amp;#125; s * @return &amp;#123;number&amp;#125; */var lengthOfLongestSubstring = function(s) &amp;#123;    let letterMap = &amp;#123;&amp;#125;    let l">
+<meta property="og:locale" content="zh">
+<meta property="og:updated_time" content="2019-09-21T10:31:57.061Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Leetcode 3 无重复字符的最长子串">
+<meta name="twitter:description" content="尝试解答： 123456789101112131415161718192021222324/** * @param &amp;#123;string&amp;#125; s * @return &amp;#123;number&amp;#125; */var lengthOfLongestSubstring = function(s) &amp;#123;    let letterMap = &amp;#123;&amp;#125;    let l">
+  
+    <link rel="alternate" href="/atom.xml" title="七水凌世界" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">七水凌世界</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://ryonanamizu.github.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Leetcode-3-无重复字符的最长子串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/21/Leetcode-3-无重复字符的最长子串/" class="article-date">
+  <time datetime="2019-09-21T10:26:43.000Z" itemprop="datePublished">2019-09-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Leetcode/">Leetcode</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Leetcode 3 无重复字符的最长子串
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>尝试解答：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; s</span></span><br><span class="line"><span class="comment"> * @return &#123;number&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> lengthOfLongestSubstring = <span class="function"><span class="keyword">function</span>(<span class="params">s</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> letterMap = &#123;&#125;</span><br><span class="line">    <span class="keyword">let</span> longestLength = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> firstIndex = <span class="number">0</span>; firstIndex &lt; s.length; firstIndex++) &#123;</span><br><span class="line">        <span class="keyword">let</span> currentLength = <span class="number">0</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> secondIndex = firstIndex; secondIndex &lt; s.length; secondIndex++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(letterMap[s[secondIndex]])&#123;</span><br><span class="line">                letterMap = &#123;&#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                letterMap[s[secondIndex]] = <span class="literal">true</span></span><br><span class="line">                currentLength ++</span><br><span class="line">                <span class="keyword">if</span>(currentLength &gt; longestLength) &#123;</span><br><span class="line">                    longestLength = currentLength</span><br><span class="line">                &#125;                </span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> longestLength</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这个解答无论时空复杂度均爆表……还需要后续优化。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://ryonanamizu.github.com/2019/09/21/Leetcode-3-无重复字符的最长子串/" data-id="ck0teylyo000103qm67i3fdau" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Leetcode/">Leetcode</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/09/21/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/09/21/如何在Github-Pages上搭建User-Page的hexo博客/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何在Github Pages上搭建User Page的hexo博客</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Experience/">Experience</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Leetcode/">Leetcode</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Github/">Github</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Javascript/">Javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Leetcode/">Leetcode</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TarvisCI/">TarvisCI</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/userPage/">userPage</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Github/" style="font-size: 10px;">Github</a> <a href="/tags/Javascript/" style="font-size: 20px;">Javascript</a> <a href="/tags/Leetcode/" style="font-size: 20px;">Leetcode</a> <a href="/tags/TarvisCI/" style="font-size: 10px;">TarvisCI</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/userPage/" style="font-size: 10px;">userPage</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/09/21/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/21/Leetcode-3-无重复字符的最长子串/">Leetcode 3 无重复字符的最长子串</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/21/如何在Github-Pages上搭建User-Page的hexo博客/">如何在Github Pages上搭建User Page的hexo博客</a>
+          </li>
+        
+          <li>
+            <a href="/2019/09/21/Leetcode-2-两数相加/">Leetcode 2 两数相加</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Ryo Nanamizu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
